@@ -1,0 +1,31 @@
+name: Build and test BattleGrid
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - name: Test and package
+        run: mvn --batch-mode verify
+      - name: Prepare Java deployment bundle
+        run: |
+          mkdir bundle
+          cp target/battlegrid.jar Procfile bundle/
+          cd bundle
+          zip ../battlegrid-deploy.zip battlegrid.jar Procfile
+      - uses: actions/upload-artifact@v4
+        with:
+          name: battlegrid-deploy
+          path: battlegrid-deploy.zip

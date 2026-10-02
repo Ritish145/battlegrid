@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BattleGrid · Operation Relay</title><link rel="stylesheet" href="style.css"><script src="game.js" defer></script></head>
+<body>
+<header><a class="brand" href="/">B<span>+</span>G <small>BATTLEGRID</small></a><div class="tag">TACTICAL COMMAND / 01</div><button id="newGame" class="secondary">New match</button></header>
+<main>
+<section class="intro"><div><div class="eyebrow">OPERATION RELAY</div><h1>Every move<br><span>changes the battle.</span></h1><p>Command your squad. Capture energy relays. Break the red base.</p></div><div class="mission"><span class="dot"></span><span id="phase">Connecting to command…</span><strong id="round">ROUND 01</strong></div></section>
+<div class="layout">
+<section class="arena" aria-label="Battlefield">
+<div class="arena-top"><span>SECTOR 08 <small>8 × 8</small></span><div class="legend"><span class="blue-dot"></span> You <span class="red-dot"></span> Computer</div></div>
+<div class="meters"><div><span>BLUE BASE <b id="blueHealth">120 / 120</b></span><progress id="blueBar" max="120" value="120"></progress></div><div class="enemy"><span>RED BASE <b id="redHealth">120 / 120</b></span><progress id="redBar" max="120" value="120"></progress></div></div>
+<div class="board-frame"><div class="letters" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div><div id="board" class="board" aria-label="8 by 8 battlefield"></div></div>
+<div class="arena-bottom"><span><i class="relay-symbol">◇</i> Relay +10 energy / turn</span><span>▧ Impassable terrain</span></div>
+</section>
+<aside>
+<section class="panel energy"><div class="eyebrow">POWER RESERVE</div><div><strong id="energy">60</strong><span>/ 100 energy</span></div><progress id="energyBar" max="100" value="60"></progress><p>+30 each turn, plus occupied relays.</p></section>
+<section class="panel commands"><div class="eyebrow">SQUAD COMMAND</div><h2 id="selectedName">Select a blue unit</h2><p id="unitInfo">Click a unit on the board to see its orders.</p><div class="actions"><button data-mode="MOVE">Move <small>10</small></button><button data-mode="ATTACK">Attack <small>20</small></button><button id="shield">Shield <small>15</small></button></div><div class="recruit"><span>REINFORCEMENTS</span><button data-recruit="SCOUT">+ Scout <small>30</small></button><button data-recruit="TANK">+ Tank <small>40</small></button></div><button id="endTurn" class="primary">End turn <span>→</span></button><p class="hint" id="hint">Choose your orders, then end the turn.</p></section>
+<section class="panel feed"><div class="eyebrow">FIELD REPORT</div><ol id="log" aria-label="Recent battle events"></ol></section>
+</aside>
+</div>
+<details class="rules"><summary>Field manual · How to play</summary><p>Blue moves first. Select a blue scout or tank, choose Move or Attack, then click a highlighted tile. Each unit gets one action per turn. You can end a turn at any time. Red responds automatically.</p><p><b>Scouts:</b> 45 health, move 3 tiles, range 1, damage 18. <b>Tanks:</b> 75 health, move 2, range 3, damage 25. Distance uses horizontal and vertical steps; units cannot move through occupied tiles or walls. Attacks use range and can fire across walls.</p><p><b>Shields:</b> halve the next hit, then disappear; unused shields expire at that team's next turn. <b>Recruit:</b> choose a highlighted empty tile next to your base. New units act next turn. Maximum 8 troops per side. <b>Relays:</b> occupy diamond tiles for +10 energy at the start of your turn. Energy caps at 100. Destroy the enemy base to win; the match draws after round 80.</p></details>
+</main><footer>BATTLEGRID <span>JAVA ENGINE · BROWSER COMMAND</span></footer>
+<div id="message" role="status" aria-live="polite"></div>
+</body></html>
